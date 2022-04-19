@@ -13,32 +13,29 @@ function writePassword() {
 // Add event listener to generate button
 generateBtn.addEventListener("click", writePassword);
 
-//Start of Ben's code =====================================================
-
-//define and build generatePassword()
-
-//this function needs to prompt the user with prompt() to specify the attributes
-//  of the password (lowercase, uppercase, numeric, and/or special characters)
+//================================== Start of Ben's code ===========================================
 
 function generatePassword() {
   
-  //set a new blank password that will be added to later on
+  //set a new blank password that will be built to later on
   var newPass = "";
 
   //superArray is used to combine all selected char types, and utilize random() to parse
-  // array to select random chars
+  // the array and select random chars
   var superArray;
 
+  // definitions for character types
   var lowerCaseChars = "abcsefghijklmnopqrstuvwxyz";
   var upperCaseChars =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
   var numericChars = "0123456789";
   var specialChars = "!\"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~";
-  var pwLength = "10";
 
-  // This string will be a combination of the "True" isEnabled chars
+  var pwLength;
+
+  // This string will be a combination of all "y" user inputs
   var bigString = "";
 
-  //Prompt window for user inputs. Utilize if-else and while statments for data validation
+  // Prompts with data validation below==========
   function prompter(){
 
     // ===========pwLength Answer================
@@ -47,7 +44,7 @@ function generatePassword() {
       if (pwLength >= 8 && pwLength < 128) break;
     }
 
-    // ===========Lowercase Answer================
+    // ===========Lowercase Answer===============
 
     while (true) {
       lowerAnswer = prompt("Use lowercase letters?\ny or n", "y");
@@ -58,7 +55,7 @@ function generatePassword() {
       console.log(bigString);
     }
 
-    // ===========Uppercase Answer================
+    // ===========Uppercase Answer===============
 
     while (true) {
       upperAnswer = prompt("Use uppercase letters?\ny or n", "y");
@@ -69,7 +66,7 @@ function generatePassword() {
       console.log(bigString);
     }
 
-    // ===========Numeric Answer================
+    // ===========Numeric Answer==================
 
     while (true) {
       numericAnswer = prompt("Use numeric characters?\ny or n", "y");
@@ -80,7 +77,7 @@ function generatePassword() {
       console.log(bigString);
     }
 
-    // ===========Special character Answer================
+    // ===========Special character Answer========
 
     while (true) {
      specialAnswer = prompt("Use special characters?\ny or n", "y");
@@ -102,16 +99,17 @@ function generatePassword() {
 
   // Pull random characters from superArray and put them together as a string
   function randomizer(){
-    superArray = bigString.split("");
-    console.log(superArray);
-    console.log(pwLength);
 
+    // Define the superArray derived from the bigString
+    superArray = bigString.split("");
+
+    // Pull random indexes from the new superArray however many times the pwLength is
     for (var i = 0; i < pwLength; i++){
       newPass += superArray[Math.floor(Math.random() * superArray.length)];
     }
-    // return newPass;
   }
 
+  //run our new functions, and return the new password!
   prompter();
   randomizer();
   return newPass;
