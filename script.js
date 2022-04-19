@@ -23,112 +23,96 @@ generateBtn.addEventListener("click", writePassword);
 function generatePassword() {
   
   //set a new blank password that will be added to later on
-  var newPass = '';
+  var newPass = "";
 
   //superArray is used to combine all selected char types, and utilize random() to parse
   // array to select random chars
-  var superArray = [];
+  var superArray;
 
-  var lowerCaseChars = "abcsefghijklmnopqrstuvwxyz"
-  var upperCaseChars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  var numericChars = "0123456789"
-  var specialChars = "!\"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~"
-  var pwLength;
-
-  //This object "Inputs" prompts the user for inputs, and stores the chars
-  // var inputs = {
-  //  lowercase: {
-  //     userPrompt: prompt("Use lowercase letters?\ny or n", "y"),
-  //     chars: "abcsefghijklmnopqrstuvwxyz"
-  //   },
-  //   uppercase: { 
-  //     userPrompt: prompt("Use uppercase letters?\ny or n", "y"),
-  //     chars: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
-  //   },
-  //   numeric: {
-  //     userPrompt: prompt("Use numeric characters?\ny or n", "y"),
-  //     chars: "0123456789"
-  //   },
-  //   special: {
-  //     userPrompt: prompt("Use special characters?\ny or n", "y"),
-  //     chars: "!\"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~"
-  //   }
-  // }
-
+  var lowerCaseChars = "abcsefghijklmnopqrstuvwxyz";
+  var upperCaseChars =  "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+  var numericChars = "0123456789";
+  var specialChars = "!\"#$%&\'()*+,-./:;<=>?@[\]^_`{|}~";
+  var pwLength = "10";
 
   // This string will be a combination of the "True" isEnabled chars
   var bigString = "";
 
   //Prompt window for user inputs. Utilize if-else and while statments for data validation
   function prompter(){
-    var pwLength = prompt("How many characters in this password?\nBetween 8 and 128", "15");
-  if (pwLength <= 7 || pwLength > 128){
-    pwLength = prompt("ERROR: Please input a number between 8 and 128", "15");
-  }
 
-  // ===========lowerAnswer================
-  
-  //This do-while loop will continue to prompt until an answer is given.
-  do{
-    lowerAnswer = prompt("Use lowercase letters?\ny or n", "y");
-    lowerAnswer = lowerAnswer.toLowerCase();
-    if(lowerAnswer !== "y" || "n"){
-      loweranswer = "what the fuck";
+    // ===========pwLength Answer================
+    while (true) {
+      pwLength = prompt("How many characters in this password?\nBetween 8 and 128", "15");
+      if (pwLength >= 8 && pwLength < 128) break;
     }
-  } while (!lowerAnswer);
 
-  if (lowerAnswer === "y") {
-    bigString += lowerCaseChars;
-  } else if (lowerAnswer === "n"){
+    // ===========Lowercase Answer================
 
+    while (true) {
+      lowerAnswer = prompt("Use lowercase letters?\ny or n", "y");
+      if (lowerAnswer === "n" || lowerAnswer === "y") break;
+    }
+    if (lowerAnswer === "y") {
+      bigString += lowerCaseChars;
+      console.log(bigString);
+    }
+
+    // ===========Uppercase Answer================
+
+    while (true) {
+      upperAnswer = prompt("Use uppercase letters?\ny or n", "y");
+      if (upperAnswer === "n" || upperAnswer === "y") break;
+    }
+    if (upperAnswer === "y") {
+      bigString += upperCaseChars;
+      console.log(bigString);
+    }
+
+    // ===========Numeric Answer================
+
+    while (true) {
+      numericAnswer = prompt("Use numeric characters?\ny or n", "y");
+      if (numericAnswer === "n" || numericAnswer === "y") break;
+    }
+    if (numericAnswer === "y") {
+      bigString += numericChars;
+      console.log(bigString);
+    }
+
+    // ===========Special character Answer================
+
+    while (true) {
+     specialAnswer = prompt("Use special characters?\ny or n", "y");
+     if (specialAnswer === "n" || specialAnswer === "y") break;
+    }
+    if (specialAnswer === "y") {
+      bigString += specialChars;
+      console.log(bigString);
+    }
+
+    // ===========In case user selects n for everything, re-invoke the function=========
+    while(true){
+      if(bigString === ""){
+        alert("Bruh you gotta choose 'y' at least once...");
+        prompter();
+      } break;
+    }
   }
-  
-  // lowerAnswer = prompt("Use lowercase letters?\ny or n", "y");
-  // lowerAnswer = lowerAnswer.toLowerCase();
 
-  // while(lowerAnswer !== "y" || "n"){
-  //   lowerAnswer = prompt("Woah there buddy. Please respond with either 'y' or 'n'.");
-  // }
-  // lowerAnswer = lowerAnswer.toLowerCase();
-  // console.log(lowerAnswer);
-  // while(!lowerAnswer){
-  //   if (lowerAnswer === "y") {
-  //     bigString += lowerCaseChars;
-  //   } else if (lowercase === "n"){
-
-  //   } else {
-  //       lowerAnswer = "";
-  //   }
-  // } 
-
-  console.log(lowerAnswer);
-
-
-}
-
-  // Iterate through all object properties, determine the answer, flag it for isEnabled
-  //  and add the chars to the bigString
-    // for (var x in inputs){
-    //   if(inputs[x].userPrompt !== "n") {
-    //     bigString += inputs[x].chars;
-    //   }
-    // }
-
-    //Create superArray from the combinated bigString
-    var superArray = bigString.split("");
-    console.log("The superArray is " + superArray);
-
-  // https://www.w3schools.com/Js/js_array_sort.asp
-  // check out the Fisher Yates method
   // Pull random characters from superArray and put them together as a string
   function randomizer(){
+    superArray = bigString.split("");
+    console.log(superArray);
+    console.log(pwLength);
+
     for (var i = 0; i < pwLength; i++){
       newPass += superArray[Math.floor(Math.random() * superArray.length)];
     }
+    // return newPass;
   }
 
   prompter();
   randomizer();
   return newPass;
-
 }
