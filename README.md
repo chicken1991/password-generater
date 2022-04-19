@@ -7,6 +7,13 @@ The new function generatePassword() returns a new random password.
 
 ![The Password Generator application displays a red button to "Generate Password".](./images/demo.png)
 
+
+# Live demo
+* https://chicken1991.github.io/password-generator/
+
+# Github repo
+* https://github.com/chicken1991/password-generator.git
+
 ## User Story
 
 ```
